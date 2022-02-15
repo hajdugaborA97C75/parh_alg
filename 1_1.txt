@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+void one (int x){
+    printf("%.8d\n", x);
+}
+
+void two(){
+    for (int i = 0; i < 10; i++) {
+        printf("%d\n", i);
+        sleep(0.5);
+    }
+}
+
+void three(){
+    for (int i = 0; i < 10; i++) {
+        printf("%.2f\n", ((float)rand()/(float)(RAND_MAX)) * 500 + 500);
+    }
+}
+
+void four(){
+    int start,end;
+    printf("Enter the starting and the ending number separated by a space: ");
+    scanf("%d %d", &start, &end);
+    printf("Generated random number: %d\n", rand()%(start - end + 1));
+}
+
+void five(){
+    int x = rand()%(0 - 11);
+    int y = rand()%(0 - 11);
+    int result = x + y;
+    int input;
+    printf("Enter the result: %d + %d\n", x, y);
+    scanf("%d", &input);
+    while(1){
+        if(input == result){
+            printf("Good job!");
+            return;
+        }
+        else{
+            printf("Try again: ");
+            scanf("%d\n", &input);
+        }
+    }
+    
+    printf("Good job!");
+    
+}
+
+int main()
+{
+    srand(time(0));
+    /*one(10);
+    two();
+    three();
+    four();*/
+    five();
+
+    return 0;
+}
