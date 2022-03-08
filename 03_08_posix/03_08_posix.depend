@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1646732636 source:d:\a97c75\paralell\03_08_posix\main.c
+	<pthread.h>
+	<stdio.h>
+	<unistd.h>
+
