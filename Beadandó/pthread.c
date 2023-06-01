@@ -5,7 +5,7 @@
 #include <pthread.h>
 #include <windows.h>
 
-#define R 5000000.0 // A kör sugarának értéke
+#define R 100000000.0 // A kör sugarának értéke
 #define NUM_SIMULATIONS 5 // A szimulációk száma
 
 
@@ -30,6 +30,8 @@ void* simulate(void* arg) {
 }
 
 int main() {
+	FILE *file;
+	file = fopen("pthread.csv", "a");
 	
     pthread_t threads[NUM_SIMULATIONS]; // Párhuzamos szálak
     int steps[NUM_SIMULATIONS] = {0}; // Lépések száma
@@ -52,12 +54,15 @@ int main() {
 
     // Eredmények kiíratása
     for (int i = 0; i < NUM_SIMULATIONS; i++) {
-        printf("Simulation %d: %d steps\n", i + 1, steps[i]);
+        fprintf(file,"%d,", steps[i]);
     }
 
 	end = clock();
 	total = (double)(end - start) / CLOCKS_PER_SEC;
-	printf( "The runtime of the simulation: %.2f seconds.\n", total);
-    
+	
+	fprintf(file,"%d,%.2f\n", (int)R, total);
+	
+	fclose(file);
+	
 	return 0;
 }
