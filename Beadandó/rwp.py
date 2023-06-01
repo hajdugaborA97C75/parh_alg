@@ -3,7 +3,7 @@ import math
 import threading
 import time
 
-RADIUS = 500.0
+RADIUS = 10000.0
 NUM_THREADS = 5
 
 def simulate_steps():
@@ -22,7 +22,9 @@ def simulate_steps():
 def thread_function():
     steps = simulate_steps()
     thread_id = threading.get_ident()
-    print(f"A(z) {thread_id} azonosítójú szál {steps} lépést tett meg.")
+    f = open("python.csv", "a")
+    f.write(f"{steps},")
+    f.close()
 
 def main():
     threads = []
@@ -40,8 +42,9 @@ def main():
     end_time = time.time()
     execution_time = end_time - start_time
 
-    print(f"\nA szimuláció teljes futási ideje: {execution_time:.2f} másodperc.")
-
+    f = open("python.csv", "a")
+    f.write(f"{int(RADIUS)},{execution_time:.2f}\n")
+    f.close()
 
 if __name__ == "__main__":
     main()
