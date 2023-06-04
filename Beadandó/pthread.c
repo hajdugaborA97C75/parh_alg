@@ -5,19 +5,18 @@
 #include <pthread.h>
 #include <windows.h>
 
-#define R 100000000.0 // A kör sugarának értéke
+#define R 10000.0 // A kör sugarának értéke
 #define NUM_SIMULATIONS 5 // A szimulációk száma
 
 
 void* simulate(void* arg) {
 	double x = 0.0; // Pont x-koordinátája
     double y = 0.0; // Pont y-koordinátája
-
-   
+	
+	int tid = GetCurrentThreadId();
+	srand (time(0)+tid);
 
     while (sqrt(x * x + y * y) < R) {
-		int tid = GetCurrentThreadId();
-		srand (time(0)+tid);
 		
         double x_step = -1.0 + 2.0 * ((double)rand() / RAND_MAX); // Véletlenszerű lépés generálása
         double y_step = -1.0 + 2.0 * ((double)rand() / RAND_MAX); // Véletlenszerű lépés generálása
